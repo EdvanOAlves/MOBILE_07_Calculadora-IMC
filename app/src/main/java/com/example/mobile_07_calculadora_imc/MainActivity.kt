@@ -5,16 +5,20 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -72,11 +76,25 @@ fun IMCScreen(name: String, modifier: Modifier = Modifier) {
                 fontWeight = FontWeight.Bold
             )
         }
-        Card() {
-//                Text("")
+        Column( modifier = Modifier.fillMaxWidth()
+            .padding(horizontal = 36.dp)) {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .offset(y = (-30.dp))
+                    .height(300.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = Color(0xFFE3FBFF) //0XFFA29898
+                ),
+                elevation = CardDefaults.cardElevation(4.dp),
+//                shape = CircleShape,
+//                border = BorderStroke(2.dp, color = Color.Black)
+            ) {
+                Text("Seus dados", color = R.color.app_col)
 //                TextField()
 //                TextField()
 //                Button() { }
+            }
         }
 
         // Card-resultado
