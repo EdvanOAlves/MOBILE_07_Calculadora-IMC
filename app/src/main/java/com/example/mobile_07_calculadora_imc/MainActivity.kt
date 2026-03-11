@@ -112,7 +112,7 @@ fun IMCScreen(name: String, modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxWidth()
                 .offset(y = (-30.dp))
-                .height(300.dp)
+                .height(350.dp)
                 .padding(horizontal = 36.dp),
             colors = CardDefaults.cardColors(
                 containerColor = Color(0xFFE3FBFF) //0XFFA29898
@@ -192,6 +192,24 @@ fun IMCScreen(name: String, modifier: Modifier = Modifier) {
                         text = "CALCULAR"
                     )
                 }
+                Button(
+                    modifier = Modifier
+                        .width(160.dp)
+                        .height(75.dp),
+                    onClick = {
+
+                        weightField= ""
+                        heightField = ""
+                        imcMessage= ""
+                        imcValue = ""
+                    }
+                ) {
+                    Text(
+                        text = "Limpar dados",
+                        color = Color.White,
+                        fontSize = 16.sp
+                    )
+                }
             }
         }
 
@@ -217,26 +235,6 @@ fun IMCScreen(name: String, modifier: Modifier = Modifier) {
                 IMCText(text = imcMessage)
             }
 
-        }
-        Spacer(modifier = Modifier.height(32.dp))
-        Button(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(75.dp)
-                .padding(horizontal = 36.dp),
-            onClick = {
-
-                weightField= ""
-                heightField = ""
-                imcMessage= ""
-                imcValue = ""
-            }
-        ) {
-            Text(
-                text = "Limpar dados",
-                color = Color.White,
-                fontSize = 24.sp
-            )
         }
 
     }
