@@ -1,6 +1,8 @@
 package com.example.mobile_07_calculadora_imc
 
 import android.R.attr.contentDescription
+import android.R.attr.label
+import android.R.attr.singleLine
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -16,9 +18,12 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -63,7 +68,7 @@ fun IMCScreen(name: String, modifier: Modifier = Modifier) {
         mutableStateOf(0)
     }
     var weightField by remember {
-        mutableStateOf(0)
+        mutableStateOf("")
     }
     Column(modifier = modifier.fillMaxSize()) {
         Column(
@@ -101,15 +106,26 @@ fun IMCScreen(name: String, modifier: Modifier = Modifier) {
 //                shape = CircleShape,
 //                border = BorderStroke(2.dp, color = Color.Black)
             ) {
-                Text(text = "Seus dados", color = colorResource(R.color.app_col))
-                TextField(
+                Text(
+                    text = "Seus dados",
+                    fontSize = 28.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = colorResource(R.color.app_col)
+                )
+                OutlinedTextField(
                     value = weightField,
-                    onValueChange = {newInput ->
+                    onValueChange = { newInput ->
                         weightField = newInput
                     },
                     label = {
                         Text(text = "Altura")
-                    }
+                    },
+                    singleLine = true,
+                    shape = RoundedCornerShape(16.dp),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        unfocusedBorderColor = colorResource(R.color.app_col),
+                        focusedBorderColor = colorResource(R.color.app_col)
+                    )
                 )
 //                TextField()
 //                Button() { }
