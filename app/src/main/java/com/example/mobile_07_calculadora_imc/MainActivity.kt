@@ -175,7 +175,7 @@ fun IMCScreen(name: String, modifier: Modifier = Modifier) {
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp),
                     onClick = {
-                        val imc = getImc(weightField = weightField, heightField = heightField)
+                        val imc = getImc(weightField = weightField.replace(',','.'), heightField = heightField.replace(',','.'))
                         imcValue = String.format("%.1f", imc)
                         imcMessage = classifyImc(imc)
                         cardCol = colorImc(imc)
