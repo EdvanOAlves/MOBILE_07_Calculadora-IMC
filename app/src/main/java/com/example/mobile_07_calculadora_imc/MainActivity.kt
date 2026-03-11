@@ -82,7 +82,10 @@ fun IMCScreen(name: String, modifier: Modifier = Modifier) {
     var imcMessage by remember {
         mutableStateOf("")
     }
-    Column(modifier = modifier.fillMaxSize()) {
+    var cardCol by remember {
+        mutableStateOf(Color(255, 255 ,255))
+    }
+        Column(modifier = modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -174,6 +177,8 @@ fun IMCScreen(name: String, modifier: Modifier = Modifier) {
                         val imc = getImc(weightField = weightField, heightField = heightField)
                         imcValue = String.format("%.1f", imc)
                         imcMessage = classifyImc(imc)
+                        cardCol = colorImc(imc)
+
 
                     },
                     colors = ButtonDefaults.buttonColors(
@@ -195,13 +200,14 @@ fun IMCScreen(name: String, modifier: Modifier = Modifier) {
                 .height(75.dp)
                 .padding(horizontal = 36.dp),
             colors = CardDefaults.cardColors(
-                containerColor = Color(95, 182, 82, 255) //0XFFA29898
+                containerColor = cardCol
             ),
             elevation = CardDefaults.cardElevation(4.dp),
         ) {
             Row(
                 modifier = Modifier
-                    .fillMaxSize(),
+                    .fillMaxSize()
+                    .padding(horizontal = 16.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
@@ -244,5 +250,22 @@ fun classifyImc(imc:Double):String{
     }
 
     return imcMessage
+}
 
+
+fun colorImc(imc:Double):Color{
+    val errorCol = Color(255,255,255)
+    val red = Color(232, 47, 47, 255)
+    val green = Color(95, 182, 82, 255)
+    val orange = Color(232, 101, 47, 255)
+
+    val messageColor: Color = when(imc){
+        in 0.0..<18.5 -> red
+        in 18.5..< 25.0 -> green
+        in 25.0..< 30.0 -> orange
+        else if (imc > 18.5) -> red
+        else -> errorCol
+    }
+
+    return messageColor
 }
