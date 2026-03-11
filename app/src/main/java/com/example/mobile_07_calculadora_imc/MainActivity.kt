@@ -14,6 +14,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -83,9 +84,9 @@ fun IMCScreen(name: String, modifier: Modifier = Modifier) {
         mutableStateOf("")
     }
     var cardCol by remember {
-        mutableStateOf(Color(255, 255 ,255))
+        mutableStateOf(Color(255, 255, 255))
     }
-        Column(modifier = modifier.fillMaxSize()) {
+    Column(modifier = modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -217,12 +218,33 @@ fun IMCScreen(name: String, modifier: Modifier = Modifier) {
             }
 
         }
+        Spacer(modifier = Modifier.height(32.dp))
+        Button(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(75.dp)
+                .padding(horizontal = 36.dp),
+            onClick = {
+
+                weightField= ""
+                heightField = ""
+                imcMessage= ""
+                imcValue = ""
+            }
+        ) {
+            Text(
+                text = "Limpar dados",
+                color = Color.White,
+                fontSize = 24.sp
+            )
+        }
+
     }
 }
 
 
 @Composable
-fun IMCText(text:String) {
+fun IMCText(text: String) {
     Text(
         text = text,
         color = Color.White,
@@ -232,19 +254,19 @@ fun IMCText(text:String) {
 
 }
 
-fun getImc(weightField:String, heightField:String):Double{
+fun getImc(weightField: String, heightField: String): Double {
     val weight = weightField.toDouble()
-    val height = heightField.toDouble()/100
-    return weight/(height*height)
+    val height = heightField.toDouble() / 100
+    return weight / (height * height)
 }
 
-fun classifyImc(imc:Double):String{
-    val imcMessage: String = when(imc){
+fun classifyImc(imc: Double): String {
+    val imcMessage: String = when (imc) {
         in 0.0..<18.5 -> "Abaixo do peso."
-        in 18.5..< 25.0 -> "Peso ideal."
-        in 25.0..< 30.0 -> "Levemente acima do peso."
-        in 18.5..< 35.0 -> "Obesidade grau I."
-        in 18.5..< 40.0 -> "Obesidade grau II."
+        in 18.5..<25.0 -> "Peso ideal."
+        in 25.0..<30.0 -> "Levemente acima do peso."
+        in 18.5..<35.0 -> "Obesidade grau I."
+        in 18.5..<40.0 -> "Obesidade grau II."
         else if (imc > 40.0) -> "Obesidade grau III."
         else -> "Alguma coisa deu errado"
     }
@@ -253,16 +275,16 @@ fun classifyImc(imc:Double):String{
 }
 
 
-fun colorImc(imc:Double):Color{
-    val errorCol = Color(255,255,255)
+fun colorImc(imc: Double): Color {
+    val errorCol = Color(255, 255, 255)
     val red = Color(232, 47, 47, 255)
     val green = Color(95, 182, 82, 255)
     val orange = Color(232, 101, 47, 255)
 
-    val messageColor: Color = when(imc){
+    val messageColor: Color = when (imc) {
         in 0.0..<18.5 -> red
-        in 18.5..< 25.0 -> green
-        in 25.0..< 30.0 -> orange
+        in 18.5..<25.0 -> green
+        in 25.0..<30.0 -> orange
         else if (imc > 18.5) -> red
         else -> errorCol
     }
